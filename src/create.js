@@ -40,9 +40,13 @@ Create = (function () {
 
 
     var element = function (tag, contents, attributes, events) {
+        // Create the element
         var $element = document.createElement(tag);
+        // Insert an array of html, elements into the element
         insertContents($element, contents);
+        // Add event listeners to it
         augment($element, events, $element.addEventListener);
+        // Set attributes on the element (eg: id, class, title
         augment($element, attributes, $element.setAttribute);
         return $element;
     };
