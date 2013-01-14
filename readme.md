@@ -13,9 +13,9 @@ var span = Create.element('span', 'Some text', {id: 'abc', class: 'xyz'}, {click
 
 var element = document.createElement('span');
 element.appendChild(document.createTextNode('Some text'));
-element.addEventListener('click', function() {});
 element.setAttribute('id', 'abc');
 element.setAttribute('class', 'xyz');
+element.addEventListener('click', function() {});
 
 ```
 
