@@ -2,12 +2,21 @@
 
 <p>An alternative to document.createElement</p>
 
-<p>Example:</p>
+<h3>Example:</h3>
 
 <pre><code> var span = Create.element('span', 'Some text',
                  {id: 'abc', class: 'xyz'},
                  {click: function() {} }
              );
+</code></pre>
+
+<p>is just a shortcut for:</p>
+
+<pre><code> var element = document.createElement('span');
+ element.appendChild(document.createTextNode('Some text'));
+ element.setAttribute('id', 'abc');
+ element.setAttribute('class', 'xyz');
+ element.addEventListener('click', function() {});
 </code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Create</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Augment an element with event listeners, attributes etc...</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">augment</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$element</span><span class="p">,</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">map</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">map</span><span class="p">)</span> <span class="p">{</span>
