@@ -6,7 +6,7 @@
 //
 // Example:
 //
-//      var span = Create.element('span', 'Some text', {class: 'xyz'}, {click: function() {} });
+//      var span = Create.element('span', 'Some text', {id: 'abc', class: 'xyz'}, {click: function() {} });
 //
 Create = (function () {
 
