@@ -20,7 +20,7 @@
 //      element.addEventListener('click', function() {});
 //
 //
-Create = (function () {
+var Create = (function () {
 
     // Augment an element with event listeners, attributes etc...
     var augment = function ($element, map, fn) {
