@@ -7,7 +7,7 @@
 
 ```
 
-var span = Create.element('span', 'Some text', {id: 'abc', class: 'xyz'}, {click: function() {} });
+var span = Create.element({tag: 'span', contents: 'Some text', attributes: {id: 'abc', class: 'xyz'}, events: {click: function() {} }});
 
 // is just a shortcut for:
 
