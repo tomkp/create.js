@@ -6,10 +6,12 @@
 //
 // ### Example:
 //
-//      var span = Create.element('span', 'Some text',
-//                      {id: 'abc', class: 'xyz'},
-//                      {click: function() {} }
-//                  );
+//      var span = Create.element({
+//                      tag: 'span',
+//                      contents: 'Some text',
+//                      attributes: {id: 'abc', class: 'xyz'},
+//                      events: {click: function() {} }
+//                 });
 //
 // is just a shortcut for:
 //
@@ -41,30 +43,36 @@ var Create = (function () {
                 var item = array[i];
                 // We always want to append elements - so that we don't
                 // lose any behaviours (event listeners etc)
-                if (typeof item == 'string') {
+                if (item.hasOwnProperty('tagName')) {
+                    // Assume that `item` is an element
+                    $element.appendChild(item);
+                }
+                else if (typeof item == 'string') {
                     // Create a text node for any strings
                     $element.appendChild(document.createTextNode(item));
                 } else {
-                    // Assume that `item` is an element
-                    $element.appendChild(item);
+                    // Assume it's an object representing more elements
+                    // Recursively append children
+                    $element.appendChild(element(item));
                 }
             }
         }
     };
 
+
     // Create an element with name `tag` (eg: span, li, img).
     // With `contents` [optional]: mixed element(s) or string(s).
     // And `attributes` [optional]: any attributes, (eg: id, class, name, title).
     // And `events` [optional]: any event listeners, (eg: click, mouseover).
-    var element = function (tag, contents, attributes, events) {
+    var element = function(options) {
         // Create the element
-        var $element = document.createElement(tag);
+        var $element = document.createElement(options['tag']);
         // Insert an array of html, elements into the element
-        insertContents($element, contents);
+        insertContents($element, options['contents']);
         // Add event listeners to it
-        augment($element, events, $element.addEventListener);
+        augment($element, options['events'], $element.addEventListener);
         // Set attributes on the element (eg: id, class, title)
-        augment($element, attributes, $element.setAttribute);
+        augment($element, options['attributes'], $element.setAttribute);
         return $element;
     };
 
