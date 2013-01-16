@@ -1,50 +1,49 @@
-
 describe('Create Tests', function () {
 
-
-    it('should create a span', function () {
-        var $element = Create.element({tag:'span'});
+    it('creates a span', function () {
+        var $element = Create.element({tag: 'span'});
         expect($element.outerHTML).toEqual('<span></span>');
     });
 
 
-    it('should create a span with inner html', function () {
-        var $element = Create.element({tag:'span', contents:'Some text'});
+    it('creates a span with inner html', function () {
+        var $element = Create.element({tag: 'span', contents: 'Some text'});
         expect($element.outerHTML).toEqual('<span>Some text</span>');
     });
 
 
-    it('should create a div with an inner span and some text', function () {
+    it('creates a div with an inner span and some text', function () {
         var arrayOfContent = [document.createElement('span'), 'Some text'];
-        var $element = Create.element({tag:'div', contents: arrayOfContent});
+        var $element = Create.element({tag: 'div', contents: arrayOfContent});
         expect($element.outerHTML).toEqual('<div><span></span>Some text</div>');
     });
 
 
-    it('should create a span with inner html and attributes', function () {
+    it('creates a span with inner html and attributes', function () {
         var $element = Create.element({tag: 'span', contents: 'Some text', attributes: {class: 'xyz'}});
         expect($element.outerHTML).toEqual('<span class="xyz">Some text</span>');
     });
 
 
-    it('should attach event listener', function () {
+    it('attachs an event callback', function () {
         var spy = {
-            listener: function() {}
+            callback: function () {
+            }
         };
-        spyOn(spy, 'listener');
-        var $element = Create.element({tag: 'button', events: {click: spy.listener}});
+        spyOn(spy, 'callback');
+        var $element = Create.element({tag: 'button', events: {click: spy.callback}});
         $element.click();
-        expect(spy.listener).toHaveBeenCalled();
+        expect(spy.callback).toHaveBeenCalled();
     });
 
 
-    it('should allow for nesting elements', function () {
+    it('allows for nesting elements', function () {
         var $element = Create.element({
             tag: 'ul',
             attributes: {class: 'list'},
             contents: [
-                Create.element({tag:'li', contents:'one'}),
-                Create.element({tag:'li', contents:'two'})
+                Create.element({tag: 'li', contents: 'one'}),
+                Create.element({tag: 'li', contents: 'two'})
             ]
         });
 
@@ -52,18 +51,44 @@ describe('Create Tests', function () {
     });
 
 
-    it('should allow for nested objects', function () {
+    it('allows for nesting objects', function () {
         var $element = Create.element({
             tag: 'ul',
             attributes: {class: 'list'},
             contents: [
-                {tag:'li', contents:'one'},
-                {tag:'li', contents:'two'},
-                {tag: 'li', contents:'three'}
+                {tag: 'li', contents: 'one'},
+                {tag: 'li', contents: 'two'},
+                {tag: 'li', contents: 'three'}
             ]
         });
-
         expect($element.outerHTML).toEqual('<ul class="list"><li>one</li><li>two</li><li>three</li></ul>');
     });
+
+
+    it('binds "this" to the element in the event callback', function () {
+        var spy = {
+            callback: function (a, b) {
+                expect(this).toEqual($element);
+            }
+        };
+        spyOn(spy, 'callback').andCallThrough();
+        var $element = Create.element({tag: 'button', events: {click: spy.callback}});
+        $element.click();
+        expect(spy.callback).toHaveBeenCalled();
+        expect(spy.callback).toHaveBeenCalledWith(jasmine.any(MouseEvent));
+    });
+
+
+    it('callback receives a MouseEvent when the element is clicked', function () {
+        var spy = {
+            callback: function () {
+            }
+        };
+        spyOn(spy, 'callback');
+        var $element = Create.element({tag: 'button', events: {click: spy.callback}});
+        $element.click();
+        expect(spy.callback).toHaveBeenCalledWith(jasmine.any(MouseEvent));
+    });
+
 
 });

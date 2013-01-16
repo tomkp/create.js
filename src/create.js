@@ -66,10 +66,11 @@ var Create = (function () {
     // And `events` [optional]: any event listeners, (eg: click, mouseover).
     var element = function(options) {
         // Create the element
-        var $element = document.createElement(options['tag']);
+        var tag = options['tag'];
+        var $element = document.createElement(tag);
         // Insert an array of html, elements into the element
         insertContents($element, options['contents']);
-        // Add event listeners to it
+        // Add event listeners to the element
         augment($element, options['events'], $element.addEventListener);
         // Set attributes on the element (eg: id, class, title)
         augment($element, options['attributes'], $element.setAttribute);
