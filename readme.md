@@ -1,11 +1,11 @@
-# Create
+# create.js
 
   Shortcut for document.createElement
 
   [![Build Status](https://travis-ci.org/tomkp/create.js.png)](https://travis-ci.org/tomkp/create.js)
 
 
-## Examples:
+## examples:
 
 
 ```
