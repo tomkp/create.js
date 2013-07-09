@@ -1,6 +1,6 @@
 # create.js
 
-  Shortcut for document.createElement
+  A shortcut for document.createElement in only 739 bytes.
 
   [![Build Status](https://travis-ci.org/tomkp/create.js.png)](https://travis-ci.org/tomkp/create.js)
 
