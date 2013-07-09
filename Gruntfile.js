@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'dist/<%= pkg.name %>.min.js': 'src/create.js'
+                    'dist/create.min.js': 'src/create.js'
                 }
             }
         },
