@@ -27,7 +27,7 @@ module.exports = function(grunt) {
             debug: {
                 src: 'src/create.js',
                 options: {
-                    output: 'docs/'
+                    output: 'dist/docs/'
                 }
             }
         },
@@ -38,6 +38,24 @@ module.exports = function(grunt) {
                 src: 'src/**/*.js',
                 options: {
                     specs: 'test/specs/*spec.js'
+                }
+            },
+
+            coverage: {
+                src: 'src/**/*.js',
+                options: {
+                    specs: 'test/specs/*spec.js',
+                    template: require('grunt-template-jasmine-istanbul'),
+                    templateOptions: {
+                        coverage: 'dist/docs/coverage/coverage.json',
+                        report: 'dist/docs/coverage',
+                        thresholds: {
+                            lines: 75,
+                            statements: 75,
+                            branches: 75,
+                            functions: 90
+                        }
+                    }
                 }
             }
         }
