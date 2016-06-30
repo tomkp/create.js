@@ -8,7 +8,7 @@
 ## examples:
 
 
-```
+```javascript
 
 var span = Create.element({tag: 'span', contents: 'Some text', attributes: {id: 'abc', class: 'xyz'}, events: {click: function() {} }});
 
